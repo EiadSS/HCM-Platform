@@ -1,0 +1,25 @@
+.idea/
+.vscode/
+.DS_Store
+
+# Java
+backend/target/
+*.class
+
+# Node
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/*.tsbuildinfo
+
+# Environment
+.env
+.env.local
+backend/.env
+frontend/.env
+
+# Logs
+*.log
+
+# OS/editor
+Thumbs.db

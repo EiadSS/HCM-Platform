@@ -1,0 +1,12 @@
+node_modules
+dist
+coverage
+.vite
+*.log
+*.iml
+.idea
+.vscode
+.git
+.gitignore
+Dockerfile
+README*

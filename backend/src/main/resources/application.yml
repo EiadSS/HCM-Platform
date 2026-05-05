@@ -1,0 +1,43 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: enterprise-workforce-hcm
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/workforce_hcm}
+    username: ${SPRING_DATASOURCE_USERNAME:workforce}
+    password: ${SPRING_DATASOURCE_PASSWORD:workforce}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+app:
+  jwt:
+    secret: ${APP_JWT_SECRET:dev-secret-key-that-is-long-enough-for-hmac}
+    expiration-minutes: ${APP_JWT_EXPIRATION_MINUTES:480}
+  cors:
+    allowed-origins: ${APP_CORS_ALLOWED_ORIGINS:http://localhost:5173,http://localhost:3000}
+  demo:
+    seed: ${APP_SEED_DEMO:true}
+    reset-secret: ${APP_DEMO_RESET_SECRET:local-reset-secret}
