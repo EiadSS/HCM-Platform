@@ -1,10 +1,6 @@
 # Enterprise Workforce Management / HCM Platform
 
-Resume-demo full-stack workforce management platform built with Java Spring Boot and React. It is designed to feel like an enterprise HCM product rather than a basic employee CRUD app: role-based dashboards, tenant-scoped data, scheduling warnings, leave management, timesheet approvals, payroll preview explanations, CSV import/export workflows, simulated webhook history, filterable audit logs, and safe seeded demo reset behavior.
-
-## Why This Project Matters
-
-HCM and workforce management companies such as Dayforce, UKG, Workday, SAP SuccessFactors, ADP, Oracle HCM, and similar platforms care about secure role-based workflows, auditability, integrations, multi-tenant data isolation, time/pay rules, and operational dashboards. This project demonstrates those concerns in a recruiter-friendly public demo.
+Full-stack workforce management platform built with Java Spring Boot and React. It is designed to feel like an enterprise HCM product. With features: role-based dashboards, tenant-scoped data, scheduling warnings, leave management, timesheet approvals, payroll preview explanations, CSV import/export workflows, simulated webhook history, filterable audit logs, and safe-seeded demo reset behaviour.
 
 ## Demo Accounts
 
@@ -24,7 +20,7 @@ Password: DemoPass123!
 
 The login screen includes quick-fill buttons for every role.
 
-## Guided Recruiter Walkthrough
+##  Walkthrough
 
 1. Log in as `manager@demo.hcm.local`.
 2. Open the Scheduling tab, review the draft week, and resolve the blocking overlap or approved-leave conflict.
@@ -284,8 +280,3 @@ Implemented foundation:
 - Demo reset endpoint and UI
 - Docker/CI/docs/tests
 
-Next phases:
-
-- Shift swap approval workflow
-- Real payroll period calendars and automatic payroll-close locking
-- Deployment-specific nightly reset automation
