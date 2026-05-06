@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { render, screen, waitFor } from "@testing-library/react";
+import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { api } from "../../api/client";
 import type { WeeklySchedule } from "../../types/api";
 import { SchedulingPanel } from "./SchedulingPanel";
@@ -64,6 +64,8 @@ describe("SchedulingPanel", () => {
     mockedApi.createShift.mockResolvedValue(schedule);
     mockedApi.publishScheduleWeek.mockResolvedValue(schedule);
   });
+
+  afterEach(() => cleanup());
 
   it("renders seeded weekly schedule data", async () => {
     renderPanel();

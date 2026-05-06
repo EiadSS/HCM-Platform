@@ -48,7 +48,8 @@ body {
 .demo-panel,
 .workspace-panel,
 .metric-card,
-.work-card {
+.work-card,
+.reset-status-panel {
   border: 1px solid #dfe4dc;
   background: rgba(255, 255, 255, 0.94);
 }
@@ -102,6 +103,10 @@ body {
 .metric-card {
   padding: 18px;
   min-height: 142px;
+}
+
+.reset-status-panel {
+  padding: 14px 16px;
 }
 
 .metric-card p {

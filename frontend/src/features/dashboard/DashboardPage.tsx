@@ -5,6 +5,7 @@ import {
   Chip,
   CircularProgress,
   Divider,
+  LinearProgress,
   Paper,
   Stack,
   Tab,
@@ -123,7 +124,7 @@ export function DashboardPage() {
             <Button
               color="warning"
               variant="outlined"
-              startIcon={<RefreshCcw size={18} />}
+              startIcon={resetMutation.isPending ? <CircularProgress size={18} /> : <RefreshCcw size={18} />}
               onClick={() => {
                 if (window.confirm("Reset Northstar demo data back to the seeded recruiter walkthrough state?")) {
                   resetMutation.mutate();
@@ -131,7 +132,7 @@ export function DashboardPage() {
               }}
               disabled={resetMutation.isPending}
             >
-              Reset Demo Data
+              {resetMutation.isPending ? "Resetting..." : "Reset Demo Data"}
             </Button>
           ) : null}
         </Stack>
@@ -139,7 +140,16 @@ export function DashboardPage() {
 
       {approveMutation.isSuccess ? <Alert severity="success">Timesheet approved and audit log updated.</Alert> : null}
       {payrollMutation.isSuccess ? <Alert severity="success">Payroll preview generated with explanation output.</Alert> : null}
-      {resetMutation.isSuccess ? <Alert severity="success">Demo data reset to the seeded recruiter state.</Alert> : null}
+      {resetMutation.isPending ? (
+        <Paper className="reset-status-panel" elevation={0}>
+          <Stack spacing={1}>
+            <Typography variant="body2">Restoring Northstar demo data to the original walkthrough state...</Typography>
+            <LinearProgress color="warning" />
+          </Stack>
+        </Paper>
+      ) : null}
+      {resetMutation.isSuccess ? <Alert severity="success">Demo data reset complete. The walkthrough is back to its original seeded state.</Alert> : null}
+      {resetMutation.isError ? <Alert severity="error">{resetMutation.error.message}</Alert> : null}
 
       <Box className="metric-grid">
         {dashboard.data?.metrics.map((metric) => (

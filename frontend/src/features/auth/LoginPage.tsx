@@ -103,6 +103,9 @@ export function LoginPage() {
               <Typography variant="body2">
                 Manager login is prefilled. Review schedule warnings, approve a submitted timesheet, open the payroll preview, then check the audit log.
               </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                Need a fresh walkthrough? Use the System Admin quick-fill, then click Reset Demo Data from the dashboard.
+              </Typography>
             </Paper>
             <Alert severity={backendStatus === "ready" ? "success" : backendStatus === "slow" ? "warning" : "info"} className="backend-wake-alert">
               {backendStatus === "ready"
