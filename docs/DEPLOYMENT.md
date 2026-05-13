@@ -27,6 +27,7 @@ Backend:
 - `SPRING_DATASOURCE_PASSWORD`: database password.
 - `APP_JWT_SECRET`: long random secret, at least 32 characters.
 - `APP_CORS_ALLOWED_ORIGINS`: comma-separated frontend origins, for example `https://hcm-demo.example.com`.
+- `APP_CORS_ALLOWED_ORIGIN_PATTERNS`: optional comma-separated origin patterns. For Vercel demos, `https://*.vercel.app` prevents CORS breakage when the deployment URL changes.
 - `APP_SEED_DEMO`: keep `true` for a public recruiter demo; set `false` only for non-demo data.
 - `APP_DEMO_RESET_SECRET`: long random reset guard for API reset calls.
 - `APP_ANALYTICS_OWNER_KEY`: private code for the hidden `/analytics` owner page. Do not put this in Vercel/frontend env vars.
@@ -47,7 +48,7 @@ Render backend environment:
 ## Public Demo Checklist
 
 1. Use HTTPS for frontend and backend URLs.
-2. Set `APP_CORS_ALLOWED_ORIGINS` to the exact frontend origin.
+2. Set `APP_CORS_ALLOWED_ORIGINS` to the exact frontend origin, or set `APP_CORS_ALLOWED_ORIGIN_PATTERNS=https://*.vercel.app` for Vercel-hosted demos.
 3. Use a persistent database volume or managed PostgreSQL instance.
 4. Keep demo mode enabled only for the seeded portfolio tenant.
 5. Rotate `APP_JWT_SECRET` and `APP_DEMO_RESET_SECRET` before publishing the URL.

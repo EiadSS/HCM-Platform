@@ -38,6 +38,7 @@ app:
     expiration-minutes: ${APP_JWT_EXPIRATION_MINUTES:480}
   cors:
     allowed-origins: ${APP_CORS_ALLOWED_ORIGINS:http://localhost:5173,http://localhost:3000}
+    allowed-origin-patterns: ${APP_CORS_ALLOWED_ORIGIN_PATTERNS:https://*.vercel.app}
   demo:
     seed: ${APP_SEED_DEMO:true}
     reset-secret: ${APP_DEMO_RESET_SECRET:local-reset-secret}
