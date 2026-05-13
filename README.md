@@ -50,6 +50,7 @@ The login screen includes quick-fill buttons for every role.
 - Leave/absence management with vacation, sick, and unpaid requests, balance reservation/usage, monthly accrual rules, manager decisions, schedule-conflict warnings, calendar/list UI, and approved unpaid leave feeding payroll preview.
 - Integration Center with employee CSV field mapping, preview/commit import workflow, per-row validation errors, downloadable error reports, approved-timesheet CSV/JSON exports, and simulated webhook delivery history.
 - Filterable audit browser for employee updates, schedule publication, timesheet approval, payroll preview generation, imports, webhook events, reset safety, and demo seeding.
+- Hidden private `/analytics` owner page for first-party usage stats such as visits, anonymous unique visitors, last used time, active-now estimate, role login counts, top pages, and recent activity.
 - System Admin-only visible `Reset Demo Data` button.
 - Docker Compose with service healthchecks, Flyway migrations, Swagger/OpenAPI, Actuator health, CI, and tests.
 
@@ -152,6 +153,8 @@ Important variables:
 - `APP_JWT_SECRET`
 - `APP_SEED_DEMO`
 - `APP_DEMO_RESET_SECRET`
+- `APP_ANALYTICS_OWNER_KEY`
+- `APP_ANALYTICS_ENABLED`
 - `APP_CORS_ALLOWED_ORIGINS`
 - `VITE_API_BASE_URL`
 

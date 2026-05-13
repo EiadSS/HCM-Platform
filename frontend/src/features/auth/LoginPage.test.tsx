@@ -30,5 +30,7 @@ describe("LoginPage", () => {
 
     expect(screen.getByDisplayValue("admin@demo.hcm.local")).toBeInTheDocument();
     expect(screen.getByDisplayValue("DemoPass123!")).toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: /analytics/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /analytics/i })).not.toBeInTheDocument();
   });
 });

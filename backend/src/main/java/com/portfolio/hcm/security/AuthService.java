@@ -1,5 +1,6 @@
 package com.portfolio.hcm.security;
 
+import com.portfolio.hcm.analytics.AnalyticsService;
 import com.portfolio.hcm.common.ResourceNotFoundException;
 import com.portfolio.hcm.tenant.TenantRepository;
 import com.portfolio.hcm.user.AccountStatus;
@@ -19,26 +20,30 @@ public class AuthService {
     private final TenantRepository tenantRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final AnalyticsService analyticsService;
 
     public AuthService(
             UserAccountRepository userAccountRepository,
             TenantRepository tenantRepository,
             PasswordEncoder passwordEncoder,
-            JwtService jwtService
+            JwtService jwtService,
+            AnalyticsService analyticsService
     ) {
         this.userAccountRepository = userAccountRepository;
         this.tenantRepository = tenantRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
+        this.analyticsService = analyticsService;
     }
 
-    @Transactional(readOnly = true)
-    public AuthResponse login(String email, String password) {
+    @Transactional
+    public AuthResponse login(String email, String password, String visitorId) {
         var user = userAccountRepository.findByEmailIgnoreCaseAndDeletedFalse(email)
                 .orElseThrow(() -> new BadCredentialsException("Invalid email or password"));
         if (user.getStatus() != AccountStatus.ACTIVE || !passwordEncoder.matches(password, user.getPasswordHash())) {
             throw new BadCredentialsException("Invalid email or password");
         }
+        analyticsService.recordLogin(user, visitorId);
         return new AuthResponse(jwtService.issue(user), toMe(user));
     }
 

@@ -41,6 +41,8 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/api/v1/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/analytics/events").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/owner/analytics/**").permitAll()
                         .requestMatchers("/actuator/health/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated()
                 )
@@ -53,7 +55,7 @@ public class SecurityConfig {
         var config = new CorsConfiguration();
         config.setAllowedOrigins(Arrays.stream(allowedOrigins.split(",")).map(String::trim).toList());
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Demo-Reset-Secret"));
+        config.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Demo-Reset-Secret", "X-Owner-Analytics-Key"));
         config.setExposedHeaders(List.of("Content-Disposition"));
         var source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);

@@ -401,6 +401,38 @@ body {
   font-size: 0.8rem;
 }
 
+.analytics-shell {
+  min-height: 100vh;
+  padding: 42px 0;
+  background: #f6f7f4;
+}
+
+.analytics-code-card,
+.analytics-filter-panel,
+.analytics-panel,
+.analytics-metric-card {
+  border: 1px solid #dfe4dc;
+  background: #ffffff;
+}
+
+.analytics-code-card {
+  max-width: 520px;
+}
+
+.analytics-filter-panel {
+  padding: 16px;
+}
+
+.analytics-panel {
+  flex: 1;
+}
+
+.analytics-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(150px, 1fr));
+  gap: 14px;
+}
+
 @media (max-width: 980px) {
   .login-grid,
   .metric-grid,
@@ -408,8 +440,9 @@ body {
   .schedule-week-grid,
   .leave-balance-grid,
   .leave-calendar-strip,
-  .integration-mapping-grid,
-  .audit-filter-grid {
+    .integration-mapping-grid,
+    .audit-filter-grid,
+    .analytics-metric-grid {
     grid-template-columns: 1fr;
   }
 

@@ -41,3 +41,6 @@ app:
   demo:
     seed: ${APP_SEED_DEMO:true}
     reset-secret: ${APP_DEMO_RESET_SECRET:local-reset-secret}
+  analytics:
+    enabled: ${APP_ANALYTICS_ENABLED:true}
+    owner-key: ${APP_ANALYTICS_OWNER_KEY:local-analytics-owner-key}

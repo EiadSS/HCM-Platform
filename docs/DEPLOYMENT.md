@@ -29,6 +29,8 @@ Backend:
 - `APP_CORS_ALLOWED_ORIGINS`: comma-separated frontend origins, for example `https://hcm-demo.example.com`.
 - `APP_SEED_DEMO`: keep `true` for a public recruiter demo; set `false` only for non-demo data.
 - `APP_DEMO_RESET_SECRET`: long random reset guard for API reset calls.
+- `APP_ANALYTICS_OWNER_KEY`: private code for the hidden `/analytics` owner page. Do not put this in Vercel/frontend env vars.
+- `APP_ANALYTICS_ENABLED`: keep `true` to collect lightweight first-party demo usage stats.
 
 Frontend build arg:
 
@@ -49,13 +51,15 @@ Render backend environment:
 3. Use a persistent database volume or managed PostgreSQL instance.
 4. Keep demo mode enabled only for the seeded portfolio tenant.
 5. Rotate `APP_JWT_SECRET` and `APP_DEMO_RESET_SECRET` before publishing the URL.
-6. Confirm `/actuator/health` returns `UP`.
-7. Run `docker compose config` and the verification commands from the README before sharing.
-8. Open the deployed frontend after 15+ minutes of inactivity and confirm the backend wake-up notice appears before login.
+6. Set `APP_ANALYTICS_OWNER_KEY` to a private value, then open `/analytics` on the frontend and confirm the code gate works.
+7. Confirm `/actuator/health` returns `UP`.
+8. Run `docker compose config` and the verification commands from the README before sharing.
+9. Open the deployed frontend after 15+ minutes of inactivity and confirm the backend wake-up notice appears before login.
 
 ## Tradeoffs
 
 - The app intentionally includes quick-fill demo accounts for recruiter review.
 - Free Render backend instances can sleep after inactivity. The frontend wakes the backend on the login page, but the first sign-in can still take about a minute.
+- The hidden analytics page uses anonymous browser IDs and successful-login events. It is meant for portfolio traffic visibility, not production analytics/compliance.
 - Payroll is a gross-pay preview only. It does not calculate taxes, deductions, filing, or compliance outcomes.
 - Webhooks are simulated event history and delivery attempts; no real outbound delivery is attempted.

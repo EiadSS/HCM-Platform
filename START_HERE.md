@@ -47,6 +47,8 @@ Use any quick-fill button on the login page.
 
 All demo accounts use `DemoPass123!`.
 
+Owner-only usage stats are available at `/analytics` on the frontend URL. This route is intentionally not linked in the app and requires the private `APP_ANALYTICS_OWNER_KEY` backend value.
+
 ## If Docker Is Not Running
 
 If you see an error about `dockerDesktopLinuxEngine`, open Docker Desktop first, wait for it to finish starting, then run `start-demo.cmd` again.

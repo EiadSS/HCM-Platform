@@ -24,7 +24,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public AuthResponse login(@Valid @RequestBody LoginRequest request) {
-        return authService.login(request.email(), request.password());
+        return authService.login(request.email(), request.password(), request.visitorId());
     }
 
     @GetMapping("/me")

@@ -458,3 +458,42 @@ export interface AuditLogFilters {
   entityId?: string;
   limit?: number;
 }
+
+export interface AnalyticsEventRequest {
+  eventType: string;
+  path?: string;
+  referrer?: string;
+  metadataJson?: string;
+}
+
+export interface AnalyticsMetric {
+  label: string;
+  value: number;
+}
+
+export interface AnalyticsSummary {
+  totalEvents: number;
+  totalVisits: number;
+  uniqueVisitors: number;
+  activeVisitors: number;
+  lastUsedAt?: string;
+  totalLogins: number;
+  topPages: AnalyticsMetric[];
+  loginRoles: AnalyticsMetric[];
+}
+
+export interface AnalyticsEvent {
+  id: string;
+  occurredAt: string;
+  eventType: string;
+  path?: string;
+  referrer?: string;
+  accountEmail?: string;
+  accountRole?: string;
+  metadataJson?: string;
+}
+
+export interface AnalyticsFilters {
+  from?: string;
+  to?: string;
+}

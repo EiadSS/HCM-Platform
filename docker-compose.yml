@@ -35,6 +35,8 @@ services:
       APP_JWT_SECRET: replace-with-at-least-32-characters-for-prod
       APP_SEED_DEMO: "true"
       APP_DEMO_RESET_SECRET: local-reset-secret
+      APP_ANALYTICS_OWNER_KEY: local-analytics-owner-key
+      APP_ANALYTICS_ENABLED: "true"
       APP_CORS_ALLOWED_ORIGINS: http://localhost:5173,http://localhost:3000
     ports:
       - "8080:8080"

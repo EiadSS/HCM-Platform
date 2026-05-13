@@ -1,6 +1,10 @@
 import type {
   AuditLog,
   AuditLogFilters,
+  AnalyticsEvent,
+  AnalyticsEventRequest,
+  AnalyticsFilters,
+  AnalyticsSummary,
   AuthResponse,
   ChangeRequestRequest,
   ClockRequest,
@@ -38,6 +42,7 @@ import type {
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8080/api/v1";
 const TOKEN_KEY = "hcm_demo_token";
+const ANALYTICS_VISITOR_KEY = "hcm_demo_visitor_id";
 
 function backendBaseUrl() {
   return API_BASE_URL.replace(/\/api\/v1\/?$/, "");
@@ -53,6 +58,19 @@ export function setToken(token: string) {
 
 export function clearToken() {
   localStorage.removeItem(TOKEN_KEY);
+}
+
+export function getAnalyticsVisitorId() {
+  const existing = localStorage.getItem(ANALYTICS_VISITOR_KEY);
+  if (existing) {
+    return existing;
+  }
+  const generated =
+    typeof crypto !== "undefined" && "randomUUID" in crypto
+      ? crypto.randomUUID()
+      : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  localStorage.setItem(ANALYTICS_VISITOR_KEY, generated);
+  return generated;
 }
 
 export async function wakeBackend() {
@@ -138,9 +156,31 @@ export const api = {
   login: (email: string, password: string) =>
     apiFetch<AuthResponse>("/auth/login", {
       method: "POST",
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email, password, visitorId: getAnalyticsVisitorId() })
     }),
   wakeBackend,
+  recordAnalyticsEvent: (request: AnalyticsEventRequest) =>
+    apiFetch<void>("/analytics/events", {
+      method: "POST",
+      body: JSON.stringify({ ...request, visitorId: getAnalyticsVisitorId() })
+    }),
+  analyticsSummary: (ownerKey: string, filters: AnalyticsFilters = {}) => {
+    const params = new URLSearchParams();
+    if (filters.from) {
+      params.set("from", filters.from);
+    }
+    if (filters.to) {
+      params.set("to", filters.to);
+    }
+    const query = params.toString();
+    return apiFetch<AnalyticsSummary>(`/owner/analytics/summary${query ? `?${query}` : ""}`, {
+      headers: { "X-Owner-Analytics-Key": ownerKey }
+    });
+  },
+  analyticsEvents: (ownerKey: string, limit = 50) =>
+    apiFetch<AnalyticsEvent[]>(`/owner/analytics/events?limit=${limit}`, {
+      headers: { "X-Owner-Analytics-Key": ownerKey }
+    }),
   me: () => apiFetch<MeResponse>("/auth/me"),
   dashboard: () => apiFetch<DashboardResponse>("/dashboard"),
   employees: () => apiFetch<Employee[]>("/employees"),

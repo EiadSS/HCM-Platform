@@ -11,7 +11,7 @@ public final class AuthDtos {
     private AuthDtos() {
     }
 
-    public record LoginRequest(@Email @NotBlank String email, @NotBlank String password) {
+    public record LoginRequest(@Email @NotBlank String email, @NotBlank String password, String visitorId) {
     }
 
     public record AuthResponse(String token, MeResponse user) {
