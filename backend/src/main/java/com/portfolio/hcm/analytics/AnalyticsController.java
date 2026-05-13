@@ -26,13 +26,13 @@ public class AnalyticsController {
         this.analyticsService = analyticsService;
     }
 
-    @PostMapping("/api/v1/analytics/events")
+    @PostMapping({"/api/v1/analytics/events", "/api/v1/site-stats/record"})
     public ResponseEntity<Void> recordEvent(@Valid @RequestBody AnalyticsEventRequest request) {
         analyticsService.recordPublicEvent(request);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/api/v1/owner/analytics/summary")
+    @GetMapping({"/api/v1/owner/analytics/summary", "/api/v1/owner/site-stats/summary"})
     public AnalyticsSummaryDto summary(
             @RequestHeader(value = "X-Owner-Analytics-Key", required = false) String ownerKey,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant from,
@@ -41,7 +41,7 @@ public class AnalyticsController {
         return analyticsService.summary(ownerKey, from, to);
     }
 
-    @GetMapping("/api/v1/owner/analytics/events")
+    @GetMapping({"/api/v1/owner/analytics/events", "/api/v1/owner/site-stats/recent"})
     public List<AnalyticsEventDto> events(
             @RequestHeader(value = "X-Owner-Analytics-Key", required = false) String ownerKey,
             @RequestParam(required = false) Integer limit

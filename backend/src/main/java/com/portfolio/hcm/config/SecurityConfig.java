@@ -42,7 +42,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/api/v1/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/analytics/events").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/site-stats/record").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/owner/analytics/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/owner/site-stats/**").permitAll()
                         .requestMatchers("/actuator/health/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated()
                 )

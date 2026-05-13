@@ -37,7 +37,7 @@ class AnalyticsControllerTest {
 
     @Test
     void publicEventIngestionWorksWithoutAuthentication() throws Exception {
-        mockMvc.perform(post("/api/v1/analytics/events")
+        mockMvc.perform(post("/api/v1/site-stats/record")
                         .contentType("application/json")
                         .content("""
                                 {"eventType":"PAGE_VIEW","visitorId":"visitor-1","path":"/login","referrer":"https://github.com"}
@@ -52,7 +52,7 @@ class AnalyticsControllerTest {
         doThrow(new ForbiddenOperationException("Invalid analytics owner code"))
                 .when(service).summary(eq("wrong"), any(), any());
 
-        mockMvc.perform(get("/api/v1/owner/analytics/summary")
+        mockMvc.perform(get("/api/v1/owner/site-stats/summary")
                         .header("X-Owner-Analytics-Key", "wrong"))
                 .andExpect(status().isForbidden())
                 .andExpect(jsonPath("$.message").value("Invalid analytics owner code"));
@@ -71,7 +71,7 @@ class AnalyticsControllerTest {
                 List.of(new AnalyticsMetricDto("SYSTEM_ADMIN", 2))
         ));
 
-        mockMvc.perform(get("/api/v1/owner/analytics/summary")
+        mockMvc.perform(get("/api/v1/owner/site-stats/summary")
                         .header("X-Owner-Analytics-Key", "owner-code"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.totalVisits").value(5))
@@ -92,7 +92,7 @@ class AnalyticsControllerTest {
                 "{\"source\":\"auth\"}"
         )));
 
-        mockMvc.perform(get("/api/v1/owner/analytics/events")
+        mockMvc.perform(get("/api/v1/owner/site-stats/recent")
                         .header("X-Owner-Analytics-Key", "owner-code")
                         .param("limit", "25"))
                 .andExpect(status().isOk())

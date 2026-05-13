@@ -160,7 +160,7 @@ export const api = {
     }),
   wakeBackend,
   recordAnalyticsEvent: (request: AnalyticsEventRequest) =>
-    apiFetch<void>("/analytics/events", {
+    apiFetch<void>("/site-stats/record", {
       method: "POST",
       body: JSON.stringify({ ...request, visitorId: getAnalyticsVisitorId() })
     }),
@@ -173,12 +173,12 @@ export const api = {
       params.set("to", filters.to);
     }
     const query = params.toString();
-    return apiFetch<AnalyticsSummary>(`/owner/analytics/summary${query ? `?${query}` : ""}`, {
+    return apiFetch<AnalyticsSummary>(`/owner/site-stats/summary${query ? `?${query}` : ""}`, {
       headers: { "X-Owner-Analytics-Key": ownerKey }
     });
   },
   analyticsEvents: (ownerKey: string, limit = 50) =>
-    apiFetch<AnalyticsEvent[]>(`/owner/analytics/events?limit=${limit}`, {
+    apiFetch<AnalyticsEvent[]>(`/owner/site-stats/recent?limit=${limit}`, {
       headers: { "X-Owner-Analytics-Key": ownerKey }
     }),
   me: () => apiFetch<MeResponse>("/auth/me"),
