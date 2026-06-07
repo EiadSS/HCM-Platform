@@ -12,5 +12,5 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 COPY --from=build /app/target/enterprise-workforce-hcm-0.1.0.jar app.jar
 EXPOSE 8080
-HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=5 CMD curl -fsS http://localhost:8080/actuator/health || exit 1
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=5 CMD curl -fsS "http://localhost:${PORT:-8080}/actuator/health" || exit 1
 ENTRYPOINT ["java", "-jar", "app.jar"]

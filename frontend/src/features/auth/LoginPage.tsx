@@ -109,10 +109,10 @@ export function LoginPage() {
             </Paper>
             <Alert severity={backendStatus === "ready" ? "success" : backendStatus === "slow" ? "warning" : "info"} className="backend-wake-alert">
               {backendStatus === "ready"
-                ? "Backend is awake. You can sign in normally."
+                ? "Backend is online. You can sign in normally."
                 : backendStatus === "slow"
-                  ? "The hosted backend may be waking from free-tier inactivity. First sign-in can take about a minute, then the demo runs normally."
-                  : "Warming the hosted backend now. Free demo servers can sleep after inactivity, so the first request may take a moment."}
+                  ? "The hosted backend is still starting or temporarily busy. Give it a moment, then sign in again."
+                  : "Checking backend health before sign-in."}
             </Alert>
           </Stack>
 

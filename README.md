@@ -97,6 +97,7 @@ DevOps:
 
 - Docker Compose
 - GitHub Actions CI
+- Railway backend deployment notes
 - Environment variable examples
 - Health endpoint at `/actuator/health`
 
