@@ -58,7 +58,7 @@ The login screen includes quick-fill buttons for every role.
 
 ```mermaid
 flowchart LR
-    Recruiter["Recruiter / Engineer"] --> React["React + TypeScript UI"]
+    Reviewer["Reviewer / Engineer"] --> React["React + TypeScript UI"]
     React --> API["Spring Boot REST API"]
     API --> Security["Spring Security JWT + RBAC"]
     API --> Domain["Tenant-scoped HCM modules"]
@@ -201,7 +201,7 @@ Important API groups:
 - CSV import validation checks required fields, duplicate employee IDs, existing employee number/email conflicts, invalid manager emails, invalid departments/locations/job titles, invalid pay rates, invalid weekly caps, invalid employment statuses/types, and invalid hire dates.
 - Employee imports use a preview/commit flow, commit valid rows only, keep invalid row errors visible, and expose a downloadable error report.
 - Integration exports include approved tenant-scoped timesheets only in matching CSV and JSON formats.
-- Simulated webhooks persist recruiter-readable payloads and delivery attempts for `employee.updated`, `timesheet.approved`, and `payroll.preview.generated`, with redelivery creating a new attempt.
+- Simulated webhooks persist reviewer-readable payloads and delivery attempts for `employee.updated`, `timesheet.approved`, and `payroll.preview.generated`, with redelivery creating a new attempt.
 - Audit log browsing is tenant-scoped and supports date, actor, action, entity, entity id, and limit filters.
 - Sensitive workflow events create audit records.
 

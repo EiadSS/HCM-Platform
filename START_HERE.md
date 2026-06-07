@@ -26,7 +26,7 @@ docker compose up --build
 - Backend Swagger docs: `http://localhost:8080/swagger-ui.html`
 - Backend health: `http://localhost:8080/actuator/health`
 
-## 10-Minute Recruiter Walkthrough
+## 10-Minute Demo Tour
 
 Use any quick-fill button on the login page.
 
@@ -43,7 +43,7 @@ Use any quick-fill button on the login page.
 7. Open Integrations as payroll/admin to export approved timesheets as CSV/JSON, inspect webhook payloads, and redeliver a failed simulated event.
 8. Open Integrations as HR/admin to preview the sample employee CSV, review row errors, download the error report, and commit valid rows.
 9. Open Audit as HR/payroll/admin, filter by action or actor, and inspect metadata behind a decision.
-10. Optionally log in as `admin@demo.hcm.local` and click `Reset Demo Data` to restore the seeded walkthrough.
+10. Optionally log in as `admin@demo.hcm.local` and click `Reset Demo Data` to restore the original seeded demo state.
 
 All demo accounts use `DemoPass123!`.
 

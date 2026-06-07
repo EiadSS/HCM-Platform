@@ -10,7 +10,6 @@ vi.mock("../../api/client", () => ({
   setToken: vi.fn(),
   clearToken: vi.fn(),
   api: {
-    wakeBackend: vi.fn(() => Promise.resolve(true)),
     login: vi.fn(),
     me: vi.fn()
   }

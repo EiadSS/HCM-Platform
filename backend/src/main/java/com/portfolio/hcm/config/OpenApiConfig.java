@@ -13,7 +13,7 @@ public class OpenApiConfig {
         return new OpenAPI().info(new Info()
                 .title("Enterprise Workforce HCM API")
                 .version("0.1.0")
-                .description("Recruiter-friendly workforce management demo API with RBAC, tenant isolation, audits, payroll previews, and imports.")
+                .description("Workforce management demo API with RBAC, tenant isolation, audits, payroll previews, and imports.")
                 .license(new License().name("Portfolio Demo")));
     }
 }

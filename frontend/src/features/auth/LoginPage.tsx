@@ -12,7 +12,7 @@ import {
   Typography
 } from "@mui/material";
 import { LogIn, ShieldCheck } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Navigate } from "react-router-dom";
 import { z } from "zod";
@@ -30,7 +30,6 @@ type LoginForm = z.infer<typeof schema>;
 export function LoginPage() {
   const { user, login } = useAuth();
   const [error, setError] = useState<string | null>(null);
-  const [backendStatus, setBackendStatus] = useState<"warming" | "ready" | "slow">("warming");
   const {
     register,
     handleSubmit,
@@ -43,33 +42,6 @@ export function LoginPage() {
       password: "DemoPass123!"
     }
   });
-
-  useEffect(() => {
-    let active = true;
-    const slowTimer = window.setTimeout(() => {
-      if (active) {
-        setBackendStatus("slow");
-      }
-    }, 4000);
-
-    api.wakeBackend()
-      .then(() => {
-        if (active) {
-          setBackendStatus("ready");
-        }
-      })
-      .catch(() => {
-        if (active) {
-          setBackendStatus("slow");
-        }
-      })
-      .finally(() => window.clearTimeout(slowTimer));
-
-    return () => {
-      active = false;
-      window.clearTimeout(slowTimer);
-    };
-  }, []);
 
   if (user) {
     return <Navigate to="/" replace />;
@@ -104,16 +76,9 @@ export function LoginPage() {
                 Manager login is prefilled. Review schedule warnings, approve a submitted timesheet, open the payroll preview, then check the audit log.
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                <strong>Need a fresh walkthrough?</strong> Use the System Admin quick-fill, then click Reset Demo Data from the dashboard.
+                <strong>Need a clean demo state?</strong> Use the System Admin quick-fill, then click Reset Demo Data from the dashboard.
               </Typography>
             </Paper>
-            <Alert severity={backendStatus === "ready" ? "success" : backendStatus === "slow" ? "warning" : "info"} className="backend-wake-alert">
-              {backendStatus === "ready"
-                ? "Backend is online. You can sign in normally."
-                : backendStatus === "slow"
-                  ? "The hosted backend is still starting or temporarily busy. Give it a moment, then sign in again."
-                  : "Checking backend health before sign-in."}
-            </Alert>
           </Stack>
 
           <Paper className="login-card" elevation={0}>

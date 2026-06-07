@@ -96,7 +96,7 @@ export function DashboardPage() {
           <Typography variant="overline">Demo tenant</Typography>
           <Typography variant="h4">{dashboard.data?.tenantName}</Typography>
           <Typography variant="body2" color="text.secondary">
-            Seeded workforce workflows for a public recruiter review.
+            Seeded workforce workflows for a public portfolio review.
           </Typography>
         </Box>
         <Stack direction={{ xs: "column", sm: "row" }} spacing={1}>
@@ -126,7 +126,7 @@ export function DashboardPage() {
               variant="outlined"
               startIcon={resetMutation.isPending ? <CircularProgress size={18} /> : <RefreshCcw size={18} />}
               onClick={() => {
-                if (window.confirm("Reset Northstar demo data back to the seeded recruiter walkthrough state?")) {
+                if (window.confirm("Reset Northstar demo data back to the original seeded state?")) {
                   resetMutation.mutate();
                 }
               }}
@@ -143,12 +143,12 @@ export function DashboardPage() {
       {resetMutation.isPending ? (
         <Paper className="reset-status-panel" elevation={0}>
           <Stack spacing={1}>
-            <Typography variant="body2">Restoring Northstar demo data to the original walkthrough state...</Typography>
+            <Typography variant="body2">Restoring Northstar demo data to the original seeded state...</Typography>
             <LinearProgress color="warning" />
           </Stack>
         </Paper>
       ) : null}
-      {resetMutation.isSuccess ? <Alert severity="success">Demo data reset complete. The walkthrough is back to its original seeded state.</Alert> : null}
+      {resetMutation.isSuccess ? <Alert severity="success">Demo data reset complete. The demo is back to its original seeded state.</Alert> : null}
       {resetMutation.isError ? <Alert severity="error">{resetMutation.error.message}</Alert> : null}
 
       <Box className="metric-grid">

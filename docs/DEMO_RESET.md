@@ -1,6 +1,6 @@
 # Demo Reset Safety
 
-The seeded tenant is designed for public recruiter demos. Reset restores Northstar Retail Group to the walkthrough state without touching non-demo tenants.
+The seeded tenant is designed for public portfolio demos. Reset restores Northstar Retail Group to the original seeded state without touching non-demo tenants.
 
 ## UI Reset
 
@@ -27,4 +27,4 @@ Rules:
 
 ## Public Demo Recommendation
 
-For a hosted demo, keep reset available to the seeded system admin account but use a long random `APP_DEMO_RESET_SECRET` and avoid sharing direct reset API instructions. The UI flow is enough for recruiters and preserves the story that reset is deliberate, scoped, and auditable.
+For a hosted demo, keep reset available to the seeded system admin account but use a long random `APP_DEMO_RESET_SECRET` and avoid sharing direct reset API instructions. The UI flow is enough for reviewers and preserves the story that reset is deliberate, scoped, and auditable.

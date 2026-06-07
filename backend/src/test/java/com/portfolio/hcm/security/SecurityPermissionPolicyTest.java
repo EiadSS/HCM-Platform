@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class SecurityPermissionPolicyTest {
     @Test
-    void sensitiveEndpointsKeepRecruiterVisibleRoleBoundaries() throws Exception {
+    void sensitiveEndpointsKeepDemoRoleBoundaries() throws Exception {
         assertRoles(AuditController.class.getMethod("recent", Instant.class, Instant.class, String.class, String.class, String.class, UUID.class, Integer.class),
                 "HR_ADMIN", "PAYROLL_ADMIN", "SYSTEM_ADMIN");
         assertRoles(IntegrationController.class.getMethod("previewEmployeeImport", EmployeeImportPreviewRequest.class),

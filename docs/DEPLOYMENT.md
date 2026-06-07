@@ -39,7 +39,7 @@ Backend:
 - `APP_JWT_SECRET`: long random secret, at least 32 characters.
 - `APP_CORS_ALLOWED_ORIGINS`: comma-separated frontend origins, for example `https://your-project.vercel.app`.
 - `APP_CORS_ALLOWED_ORIGIN_PATTERNS`: optional comma-separated origin patterns. For Vercel demos, `https://*.vercel.app` prevents CORS breakage when the deployment URL changes.
-- `APP_SEED_DEMO`: keep `true` for a public recruiter demo; set `false` only for non-demo data.
+- `APP_SEED_DEMO`: keep `true` for a public portfolio demo; set `false` only for non-demo data.
 - `APP_DEMO_RESET_SECRET`: long random reset guard for API reset calls.
 - `APP_ANALYTICS_OWNER_KEY`: private code for the hidden `/analytics` owner page. Do not put this in Vercel/frontend env vars.
 - `APP_ANALYTICS_ENABLED`: keep `true` to collect lightweight first-party demo usage stats.
@@ -75,7 +75,7 @@ Use this after the Railway backend is live and Vercel points at Railway.
 
 ## Tradeoffs
 
-- The app intentionally includes quick-fill demo accounts for recruiter review.
+- The app intentionally includes quick-fill demo accounts for public review.
 - Railway can sleep services only when Serverless/App Sleep is enabled; leave it disabled to avoid the Render-style cold-start experience.
 - The hidden analytics page uses anonymous browser IDs and successful-login events. It is meant for portfolio traffic visibility, not production analytics/compliance.
 - Payroll is a gross-pay preview only. It does not calculate taxes, deductions, filing, or compliance outcomes.

@@ -44,10 +44,6 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8080
 const TOKEN_KEY = "hcm_demo_token";
 const ANALYTICS_VISITOR_KEY = "hcm_demo_visitor_id";
 
-function backendBaseUrl() {
-  return API_BASE_URL.replace(/\/api\/v1\/?$/, "");
-}
-
 export function getToken() {
   return localStorage.getItem(TOKEN_KEY);
 }
@@ -71,13 +67,6 @@ export function getAnalyticsVisitorId() {
       : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
   localStorage.setItem(ANALYTICS_VISITOR_KEY, generated);
   return generated;
-}
-
-export async function wakeBackend() {
-  const response = await fetch(`${backendBaseUrl()}/actuator/health`, {
-    cache: "no-store"
-  });
-  return response.ok;
 }
 
 export async function downloadTimesheetsCsv() {
@@ -158,7 +147,6 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ email, password, visitorId: getAnalyticsVisitorId() })
     }),
-  wakeBackend,
   recordAnalyticsEvent: (request: AnalyticsEventRequest) =>
     apiFetch<void>("/site-stats/record", {
       method: "POST",
@@ -258,7 +246,7 @@ export const api = {
   approveTimesheet: (id: string) =>
     apiFetch<Timesheet>(`/timesheets/${id}/approve`, {
       method: "POST",
-      body: JSON.stringify({ note: "Approved during recruiter walkthrough" })
+      body: JSON.stringify({ note: "Approved during demo review" })
     }),
   rejectTimesheet: (id: string, note = "Rejected for correction") =>
     apiFetch<Timesheet>(`/timesheets/${id}/reject`, {
